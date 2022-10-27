@@ -1,12 +1,14 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import "./App.css";
-import loginForm from "./components/loginForm";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import './App.css';
+import loginForm from './components/loginForm';
 
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" component={loginForm} />
+      <Switch>
+        <Route exact path="/" component={ loginForm } />
+      </Switch>
     </div>
   );
 }

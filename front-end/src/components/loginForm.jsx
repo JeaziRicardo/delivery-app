@@ -1,10 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { Context as LoginContext } from "../context/Provider";
+import React, { useState } from 'react';
+import { Context as LoginContext } from '../context/Provider';
 
-export default function loginForm() {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+export default function LoginForm() {
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   const { setLoginForm } = useContext(LoginContext);
 
@@ -18,9 +17,9 @@ export default function loginForm() {
         <span>Login</span>
         <input
           data-testid="common_login__input-email"
-          onChange={(event) => {
+          onChange={ (event) => {
             setLoginEmail(event.value);
-          }}
+          } }
         />
       </label>
 
@@ -28,18 +27,18 @@ export default function loginForm() {
         <span>password</span>
         <input
           data-testid="common_login__input-password"
-          onChange={(event) => {
+          onChange={ (event) => {
             setLoginPassword(event.value);
-          }}
+          } }
         />
       </label>
 
       <button
         data-testid="common_login__login-button"
         type="button"
-        onClick={() => {
+        onClick={ () => {
           sendLoginForm();
-        }}
+        } }
       >
         Login
       </button>
@@ -47,11 +46,11 @@ export default function loginForm() {
       <button
         data-testid="common_login__login-register"
         type="button"
-        onClick={() => {}}
+        onClick={ () => {} }
       >
         Ainda não tenho conta
       </button>
-      <span data-testid="common_login__element-invalid-email"></span>
+      <span data-testid="common_login__element-invalid-email" />
     </form>
   );
 }
