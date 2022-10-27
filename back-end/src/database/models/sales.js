@@ -8,6 +8,7 @@ const Sale = (sequelize, DataTypes) => {
       totalPrice: DataTypes.DECIMAL,
       password: DataTypes.STRING,
       deliveryAddress: DataTypes.STRING,
+      deliveryNumber: DataTypes.STRING,
       saleDate: DataTypes.DATE,
       status: DataTypes.STRING,
     },

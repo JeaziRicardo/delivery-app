@@ -9,13 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       seller_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       total_price: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       delivery_address: {
         type: Sequelize.STRING
@@ -29,14 +29,6 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {
