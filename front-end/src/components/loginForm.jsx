@@ -8,10 +8,13 @@ export default function LoginForm() {
   const [invalidEmail, setInvalidEmail] = useState(false);
   /* const { setLoginForm } = useContext(LoginContext); */
 
-  function sendLoginForm() {
+  // const api = axios.create({ baseURL: 'http://localhost:3001' });
+
+  async function sendLoginForm() {
     const formLogin = { login: loginEmail, password: loginPassword };
-    const response = axios.post('http://localhost:3001/login', formLogin);
-    if (response.message === 'Not found') setInvalidEmail(true);
+    const { data } = await axios.post('http://localhost:3001/login', formLogin);
+    console.log('RESPONSE', data);
+    if (response.email === loginEmail) setInvalidEmail(true);
   }
 
   const buttonValidation = () => {
