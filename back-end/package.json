@@ -15,7 +15,9 @@
     "test": "mocha src/tests/**/*$NAME*.test.js --exit",
     "test:coverage": "nyc --all npm run test",
     "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "migration": "node -e \"require('./src/utils').runMigration()\"",
+    "seed": "node -e \"require('./src/utils').runSeed()\""
   },
   "dependencies": {
     "@hapi/boom": "9.1.4",
@@ -24,6 +26,7 @@
     "cors": "2.8.5",
     "dotenv": "16.0.0",
     "express": "4.17.3",
+    "express-async-errors": "^3.1.1",
     "express-rescue": "1.1.31",
     "jsonwebtoken": "8.5.1",
     "md5": "2.3.0",
