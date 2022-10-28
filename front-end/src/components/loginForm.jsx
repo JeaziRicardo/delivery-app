@@ -15,7 +15,7 @@ export default function LoginForm() {
     const val = /\S+@\S+\.\S+/;
     const validationEmail = val.test(loginEmail);
     const SIX = 6;
-    return !(validationEmail && loginPassword.length > SIX);
+    return !(validationEmail && loginPassword.length >= SIX);
   };
 
   return (
@@ -47,7 +47,7 @@ export default function LoginForm() {
 
       <button
         type="button"
-        data-testid="common_login__login-button"
+        data-testid="common_login__button-login"
         disabled={ buttonValidation() }
         onClick={ () => {
           sendLoginForm();
@@ -57,13 +57,15 @@ export default function LoginForm() {
       </button>
 
       <button
-        data-testid="common_login__login-register"
+        data-testid="common_login__button-register"
         type="button"
         onClick={ () => {} }
       >
         Ainda não tenho conta
       </button>
-      <span data-testid="common_login__element-invalid-email" />
+      <span data-testid="common_login__element-invalid-email">
+        Elemento oculto (Mensagens de erro)
+      </span>
     </form>
   );
 }
