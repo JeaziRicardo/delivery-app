@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-// import { Context as LoginContext } from '../context/Provider';
+import axios from 'axios';
+/* import { Context as LoginContext } from '../context/Provider'; */
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  /* const { setLoginForm } = useContext(LoginContext); */
 
-  // const { setLoginForm } = useContext(LoginContext);
-
-  // function sendLoginForm() {
-  //   setLoginForm({ email: loginEmail, password: loginPassword });
-  // }
+  function sendLoginForm() {
+    const formLogin = { login: loginEmail, password: loginPassword };
+    const response = axios.post('http://localhost:3001/login', formLogin);
+    if (response.message === 'Not found') setInvalidEmail(true);
+  }
 
   const buttonValidation = () => {
     const val = /\S+@\S+\.\S+/;
@@ -63,9 +66,8 @@ export default function LoginForm() {
       >
         Ainda não tenho conta
       </button>
-      <span data-testid="common_login__element-invalid-email">
-        Elemento oculto (Mensagens de erro)
-      </span>
+      { invalidEmail
+        && <span data-testid="common_login__element-invalid-email">Invalid email</span>}
     </form>
   );
 }

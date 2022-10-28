@@ -1,4 +1,4 @@
-const { User } = require('../../database/models');
+const { User } = require('../../database/models/User');
 const CustomError = require('../error/CustomError');
 
 const findByEmail = async ({ email }) => {
