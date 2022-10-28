@@ -1,12 +1,17 @@
-const { User } = require('../../database/models/User');
+const { User } = require('../../database/models/');
 const CustomError = require('../error/CustomError');
+
+const getAllUsers = async () => {
+  const users = await User.findAll();
+  return users;
+}
 
 const findByEmail = async ({ email }) => {
   const userExists = await User.findOne({ where: { email } });
 
   if (!userExists) throw new CustomError(404, 'Not found');
-  
+
   return true;
 };
 
-module.exports = { findByEmail };
+module.exports = { getAllUsers, findByEmail };
