@@ -8,9 +8,9 @@ const getAllUsers = async (_req, res) => {
 const findByEmail = async (req, res) => {
   const { email } = req.body;
 
-  await userService.findByEmail({ email });
+  const result = await userService.findByEmail({ email });
 
-  return res.status(200).send();
+  return res.status(200).json(result);
 };
 
 module.exports = {
