@@ -22,7 +22,7 @@ const Sale = (sequelize, DataTypes) => {
     Sale.belongsTo(models.User, { foreignKey: "sellerId", as: "seller" });
   };
 
-  return User;
+  return Sale;
 };
 
 module.exports = Sale;
