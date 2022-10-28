@@ -13,7 +13,7 @@ export default function LoginForm() {
 
   return (
     <form>
-      <label>
+      <label htmlFor="common_login__input-email">
         <span>Login</span>
         <input
           data-testid="common_login__input-email"
@@ -23,7 +23,7 @@ export default function LoginForm() {
         />
       </label>
 
-      <label>
+      <label htmlFor="common_login__input-password">
         <span>password</span>
         <input
           data-testid="common_login__input-password"
