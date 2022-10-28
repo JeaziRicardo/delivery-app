@@ -1,11 +1,13 @@
-const userService = require('../services/userService');
+const userService = require('../services/user.service');
 
 const findByEmail = async (req, res) => {
-  const { email } = req.body
-  try {
-    const result = await userService.findByEmail({ email })
-    
-  } catch (error) {
-    return res.status(500).json({ message: 'Algum erro inesperado' });
-  }
-}
+  const { email } = req.body;
+
+  await userService.findByEmail({ email });
+
+  return res.status(200).send();  
+};
+
+module.exports = {
+  findByEmail,
+};
