@@ -4,14 +4,9 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import Provider from './context/Provider';
 
 ReactDOM.render(
-  // <Provider>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  { /* </Provider>, */ },
+  <App />,
   document.getElementById('root'),
 );
 

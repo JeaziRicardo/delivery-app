@@ -27,8 +27,8 @@ export default function LoginForm() {
           id="email"
           placeholder="email@trybeer.com.br"
           data-testid="common_login__input-email"
-          onChange={ (event) => {
-            setLoginEmail(event.value);
+          onChange={ ({ target }) => {
+            setLoginEmail(target.value);
           } }
         />
       </label>
@@ -39,8 +39,8 @@ export default function LoginForm() {
           type="password"
           id="password"
           data-testid="common_login__input-password"
-          onChange={ (event) => {
-            setLoginPassword(event.value);
+          onChange={ ({ target }) => {
+            setLoginPassword(target.value);
           } }
         />
       </label>
