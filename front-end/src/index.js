@@ -7,7 +7,11 @@ import App from './App';
 import Provider from './context/Provider';
 
 ReactDOM.render(
-  <App />,
+  // <Provider>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  { /* </Provider>, */ },
   document.getElementById('root'),
 );
 

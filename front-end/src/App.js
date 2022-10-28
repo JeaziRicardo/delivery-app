@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import loginForm from './components/loginForm';
 // import Provider from './context/Provider';
@@ -7,15 +7,9 @@ import loginForm from './components/loginForm';
 function App() {
   return (
     <div className="App">
-      <h1>aaaa</h1>
-      {/* <Provider> */}
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ loginForm } />
-        </Switch>
-      </BrowserRouter>
-      {/* </Provider> */}
-
+      <Switch>
+        <Route exact path="/" component={ loginForm } />
+      </Switch>
     </div>
   );
 }
