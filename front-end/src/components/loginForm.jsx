@@ -24,7 +24,7 @@ export default function LoginForm() {
       </label>
 
       <label htmlFor="common_login__input-password">
-        <span>password</span>
+        <span>Password</span>
         <input
           data-testid="common_login__input-password"
           onChange={ (event) => {

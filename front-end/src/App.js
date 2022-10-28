@@ -1,14 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import loginForm from './components/loginForm';
+import Provider from './context/Provider';
 
 function App() {
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/" component={ loginForm } />
-      </Switch>
+      <Provider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ loginForm } />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }
