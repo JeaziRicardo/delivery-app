@@ -9,10 +9,10 @@ const getAllUsers = async () => {
 const create = async (newUser) => {
   const { email, password } = newUser;
   const emailAlreadyExists = await User.findOne({ where: { email } });
-  const hashedPassword = mds(password)
   if (emailAlreadyExists) {
     throw new CustomError(409,'Conflict')
   }
+  const hashedPassword = md5(password)
   const createdUser = await User.create({...newUser,password: hashedPassword});
   return createdUser;
 };
