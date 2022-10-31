@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { login } from '../helpers/helper';
+import postLogin from '../helpers/api';
+import loginValidation from '../helpers/validation.helper';
 /* import { Context as LoginContext } from '../context/Provider'; */
 
 export default function LoginForm() {
@@ -10,22 +11,16 @@ export default function LoginForm() {
   const history = useHistory();
   async function sendLoginForm() {
     const formLogin = { email: loginEmail, password: loginPassword };
-    const response = await login(formLogin);
+    const response = await postLogin(formLogin);
 
     console.log('RESPONSE', response);
     if (response === null) setInvalidEmail(true);
     if (response.status) history.push('/customer/products');
   }
 
-  const buttonValidation = () => {
-    const val = /\S+@\S+\.\S+/;
-    const validationEmail = val.test(loginEmail);
-    const SIX = 6;
-    return !(validationEmail && loginPassword.length >= SIX);
-  };
-
   return (
     <form>
+      <h1>LOGIN</h1>
       <label htmlFor="email">
         <span>Login</span>
         <input
@@ -54,7 +49,7 @@ export default function LoginForm() {
       <button
         type="button"
         data-testid="common_login__button-login"
-        disabled={ buttonValidation() }
+        disabled={ loginValidation({ loginEmail, loginPassword }) }
         onClick={ () => {
           sendLoginForm();
         } }
@@ -65,7 +60,7 @@ export default function LoginForm() {
       <button
         data-testid="common_login__button-register"
         type="button"
-        onClick={ () => {} }
+        onClick={ () => history.push('/register') }
       >
         Ainda não tenho conta
       </button>
