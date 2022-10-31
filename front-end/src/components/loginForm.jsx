@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { login } from '../helpers/helper';
 /* import { Context as LoginContext } from '../context/Provider'; */
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
-  /* const { setLoginForm } = useContext(LoginContext); */
-
-  // const api = axios.create({ baseURL: 'http://localhost:3001' });
-
+  const history = useHistory();
   async function sendLoginForm() {
-    const formLogin = { login: loginEmail, password: loginPassword };
-    const { data } = await axios.post('http://localhost:3001/login', formLogin);
-    console.log('RESPONSE', data);
-    if (response.email === loginEmail) setInvalidEmail(true);
+    const formLogin = { email: loginEmail, password: loginPassword };
+    const response = await login(formLogin);
+
+    console.log('RESPONSE', response);
+    if (response === null) setInvalidEmail(true);
+    if (response.status) history.push('/customer/products');
   }
 
   const buttonValidation = () => {
