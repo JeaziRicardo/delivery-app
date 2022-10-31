@@ -5,15 +5,16 @@ const CustomError = require('../error/CustomError');
 const getAllUsers = async () => {
   const users = await User.findAll();
   return users;
-}; 
+};
+
 const create = async (newUser) => {
   const { email, password } = newUser;
   const emailAlreadyExists = await User.findOne({ where: { email } });
   if (emailAlreadyExists) {
-    throw new CustomError(409,'Conflict')
+    throw new CustomError(409, 'Conflict');
   }
-  const hashedPassword = md5(password)
-  const createdUser = await User.create({...newUser,password: hashedPassword});
+  const hashedPassword = md5(password);
+  const createdUser = await User.create({ ...newUser, password: hashedPassword });
   return createdUser;
 };
 
@@ -26,4 +27,4 @@ const findByEmail = async ({ email, password }) => {
   throw new CustomError(404, 'Invalid password');
 };
 
-module.exports = { getAllUsers, findByEmail,create };
+module.exports = { getAllUsers, findByEmail, create };
