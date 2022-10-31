@@ -9,13 +9,14 @@ export default function LoginForm() {
   const [loginPassword, setLoginPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
   const history = useHistory();
+
   async function sendLoginForm() {
+    const STATUS_OK = 200;
     const formLogin = { email: loginEmail, password: loginPassword };
     const response = await postLogin(formLogin);
 
-    console.log('RESPONSE', response);
     if (response === null) setInvalidEmail(true);
-    if (response.status) history.push('/customer/products');
+    if (response.status === STATUS_OK) history.push('/customer/products');
   }
 
   return (
