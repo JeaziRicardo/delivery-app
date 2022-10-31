@@ -12,8 +12,13 @@ const findByEmail = async (req, res) => {
   if (!result) return res.status(400).end();
   return res.status(200).json(result);
 };
+const create = async (req, res) => {
+  const user = await userService.create(req.body);
+  res.status(201).json({ user });
+};
 
 module.exports = {
   getAllUsers,
   findByEmail,
+  create,
 };
