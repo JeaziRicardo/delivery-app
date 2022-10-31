@@ -11,4 +11,11 @@ const postLogin = async ({ email, password }) => instance
     return null;
   });
 
-export default postLogin;
+const postRegister = async ({ name, email, password }) => instance
+  .post('register', { name, email, password })
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+export { postLogin, postRegister };

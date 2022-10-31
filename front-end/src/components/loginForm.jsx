@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import postLogin from '../helpers/api';
+import { postLogin } from '../helpers/api';
 import loginValidation from '../helpers/validation.helper';
 /* import { Context as LoginContext } from '../context/Provider'; */
 

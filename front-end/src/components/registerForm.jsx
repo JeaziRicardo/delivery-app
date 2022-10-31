@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import loginValidation from '../helpers/validation.helper';
 
+import { postRegister } from '../helpers/api';
+
 export default function RegisterForm() {
   const [loginName, setLoginName] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
@@ -10,12 +12,12 @@ export default function RegisterForm() {
   const history = useHistory();
 
   async function sendRegisterForm() {
-    const STATUS_OK = 200;
-    const formLogin = { email: loginEmail, password: loginPassword };
-    const response = await postLogin(formLogin);
+    const STATUS_CREATED = 201;
+    const formLogin = { name: loginName, email: loginEmail, password: loginPassword };
+    const response = await postRegister(formLogin);
 
     if (response === null) setInvalidEmail(true);
-    if (response.status === STATUS_OK) history.push('/customer/products');
+    if (response.status === STATUS_CREATED) history.push('/customer/products');
   }
 
   return (
