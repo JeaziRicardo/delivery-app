@@ -22,7 +22,7 @@ const create = async (newUser) => {
     name,
     email,
     password: hashedPassword,
-    token
+    token,
   };
 };
 
