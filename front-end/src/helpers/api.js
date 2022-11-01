@@ -18,4 +18,11 @@ const postRegister = async ({ name, email, password }) => instance
     return null;
   });
 
-export { postLogin, postRegister };
+const getProducts = async () => instance
+  .get('products')
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+export { postLogin, postRegister, getProducts };
