@@ -14,12 +14,13 @@ export default function CardItem({ nome, preco, image, index }) {
       <p
         data-testid={ `customer_products__element-card-price-${index}` }
       >
-        {`R$${preco}`}
+        {preco.replace('.', ',')}
       </p>
       <img
         data-testid={ `customer_products__img-card-bg-image-${index}` }
         src={ image }
         alt={ image }
+        width="50"
       />
       <button
         data-testid={ `customer_products__button-card-rm-item-${index}` }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CardItem from '../components/cardItem';
 import Navbar from '../components/navbar';
 import { getProducts } from '../helpers/api';
+import { getItem } from '../helpers/localStorage.helper';
 
 export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
@@ -13,9 +14,11 @@ export default function CustomerProducts() {
     axiosApi();
   }, []);
 
+  const { name: userLoggedName } = getItem();
+
   return (
     <div>
-      <Navbar />
+      <Navbar name={ userLoggedName } />
       {productData
         .map(({ name, price, urlImage }, index) => (
           <CardItem

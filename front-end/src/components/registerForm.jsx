@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import loginValidation from '../helpers/validation.helper';
 
 import { postRegister } from '../helpers/api';
+import { setItem } from '../helpers/localStorage.helper';
 
 export default function RegisterForm() {
   const [loginName, setLoginName] = useState('');
@@ -17,6 +18,7 @@ export default function RegisterForm() {
     const response = await postRegister(formLogin);
 
     if (response === null) setInvalidEmail(true);
+    setItem(response.data);
     if (response.status === STATUS_CREATED) history.push('/customer/products');
   }
 

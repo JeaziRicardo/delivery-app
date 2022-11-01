@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { clearStorage } from '../helpers/localStorage.helper';
 
-export default function Navbar() {
+export default function Navbar({ name }) {
   return (
     <nav>
       <Link
@@ -19,14 +21,19 @@ export default function Navbar() {
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        Profile
+        {name}
       </span>
       <Link
-        to="/products"
+        to="/login"
         data-testid="customer_products__element-navbar-link-logout"
+        onClick={ () => clearStorage() }
       >
         Sair
       </Link>
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  name: PropTypes.string.isRequired,
+};

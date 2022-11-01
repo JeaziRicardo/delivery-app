@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { postLogin } from '../helpers/api';
+import { setItem } from '../helpers/localStorage.helper';
 import loginValidation from '../helpers/validation.helper';
 /* import { Context as LoginContext } from '../context/Provider'; */
 
@@ -16,6 +17,7 @@ export default function LoginForm() {
     const response = await postLogin(formLogin);
 
     if (response === null) setInvalidEmail(true);
+    setItem(response.data);
     if (response.status === STATUS_OK) history.push('/customer/products');
   }
 
