@@ -10,4 +10,11 @@ const setCart = ({ nome, preco }, quantidade) => {
   localStorage.setItem('cart', JSON.stringify(storage));
 };
 
-module.exports = { setCart };
+const getTotalCart = () => {
+  const totalArray = getCart();
+  const totalValue = totalArray
+    .reduce((acc, curr) => (curr.preco * curr.quantidade) + acc, 0);
+  return +totalValue;
+};
+
+module.exports = { setCart, getTotalCart };

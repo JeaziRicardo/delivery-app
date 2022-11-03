@@ -3,6 +3,7 @@ import CardItem from '../components/cardItem';
 import Navbar from '../components/navbar';
 // import DeliveryContext from '../context/DeliveryContext';
 import { getProducts } from '../helpers/api';
+import { getTotalCart } from '../helpers/cart.helper';
 // import { setCart } from '../helpers/cart.helper';
 import { getItem } from '../helpers/localStorage.helper';
 
@@ -32,6 +33,12 @@ export default function CustomerProducts() {
             index={ index + 1 }
           />
         ))}
+      <button
+        type="button"
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        {`Ver carrinho: R$ ${getTotalCart()}`}
+      </button>
     </div>
   );
 }
