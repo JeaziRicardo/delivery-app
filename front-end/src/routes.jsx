@@ -15,6 +15,8 @@ function Routes() {
       <Route exact path="/register" component={ RegisterForm } />
       <DeliveryProvider>
         <Route exact path="/customer/products" component={ CustomerProducts } />
+        <Route exact path="/customer/checkout" />
+
       </DeliveryProvider>
 
     </Switch>

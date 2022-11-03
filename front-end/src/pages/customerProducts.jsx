@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import CardItem from '../components/cardItem';
 import Navbar from '../components/navbar';
 import DeliveryContext from '../context/DeliveryContext';
@@ -10,7 +11,7 @@ export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
   const { sumItem } = useContext(DeliveryContext);
-  // const getTotal = getTotalCart();
+  const history = useHistory();
 
   useEffect(() => {
     const axiosApi = async () => {
@@ -42,6 +43,8 @@ export default function CustomerProducts() {
       <button
         type="button"
         data-testid="customer_products__checkout-bottom-value"
+        onClick={ () => history.push('/customer/checkout') }
+        disabled={ Number(sumItem) === 0 }
       >
         {totalValue.toFixed(2).replace('.', ',')}
       </button>
