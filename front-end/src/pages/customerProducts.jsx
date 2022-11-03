@@ -3,6 +3,7 @@ import CardItem from '../components/cardItem';
 import Navbar from '../components/navbar';
 import { getProducts } from '../helpers/api';
 import { getItem } from '../helpers/localStorage.helper';
+import DeliveryProvider from '../context/DeliveryProvider';
 
 export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
@@ -18,17 +19,19 @@ export default function CustomerProducts() {
 
   return (
     <div>
-      <Navbar name={ userLoggedName } />
-      {productData
-        .map(({ name, price, urlImage }, index) => (
-          <CardItem
-            key={ index }
-            nome={ name }
-            preco={ price }
-            image={ urlImage }
-            index={ index + 1 }
-          />
-        ))}
+      <DeliveryProvider>
+        <Navbar name={ userLoggedName } />
+        {productData
+          .map(({ name, price, urlImage }, index) => (
+            <CardItem
+              key={ index }
+              nome={ name }
+              preco={ price }
+              image={ urlImage }
+              index={ index + 1 }
+            />
+          ))}
+      </DeliveryProvider>
     </div>
   );
 }

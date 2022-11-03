@@ -36,7 +36,7 @@ export default function CardItem({ nome, preco, image, index }) {
         name="item_quant"
         id="input-card-quantity"
         value={ quantidade }
-        onChange={ ({ target }) => setQuantidade(target) }
+        onChange={ ({ target }) => setQuantidade(Number(target.value)) }
       />
       <button
         data-testid={ `customer_products__button-card-add-item-${index}` }
