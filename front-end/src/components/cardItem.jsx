@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { setCart } from '../helpers/cart.helper';
 // import DeliveryContext from '../context/DeliveryContext';
@@ -11,7 +11,23 @@ export default function CardItem({ nome, preco, image, index }) {
   //   setFullCarItens({ nome, preco, quantidade });
   // }, [setQuantidade]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setCart({ nome, preco }, quantidade);
+  // }, [quantidade]);
+
+  const useDidMountEffect = (fn, inputs) => {
+    const didMountRef = useRef(false);
+
+    useEffect(() => {
+      if (didMountRef.current) {
+        fn();
+      } else {
+        didMountRef.current = true;
+      }
+    }, inputs);
+  };
+
+  useDidMountEffect(() => {
     setCart({ nome, preco }, quantidade);
   }, [quantidade]);
 
@@ -37,7 +53,10 @@ export default function CardItem({ nome, preco, image, index }) {
       <button
         data-testid={ `customer_products__button-card-rm-item-${index}` }
         type="button"
-        onClick={ () => setQuantidade((prev) => prev - 1) }
+        onClick={ () => {
+          setQuantidade((prev) => prev - 1);
+          setCart({ nome, preco }, quantidade);
+        } }
         disabled={ quantidade === 0 }
       >
         -
@@ -57,6 +76,7 @@ export default function CardItem({ nome, preco, image, index }) {
         type="button"
         onClick={ () => {
           setQuantidade((prev) => prev + 1);
+          setCart({ nome, preco }, quantidade);
         } }
       >
         +
