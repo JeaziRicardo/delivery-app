@@ -1,19 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { setCart } from '../helpers/cart.helper';
-// import DeliveryContext from '../context/DeliveryContext';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
-  // const { setFullCarItens } = useContext(DeliveryContext);
-
-  // useEffect(() => {
-  //   setFullCarItens({ nome, preco, quantidade });
-  // }, [setQuantidade]);
-
-  // useEffect(() => {
-  //   setCart({ nome, preco }, quantidade);
-  // }, [quantidade]);
 
   const useDidMountEffect = (fn, inputs) => {
     const didMountRef = useRef(false);
