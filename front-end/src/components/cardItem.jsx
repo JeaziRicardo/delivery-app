@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { setCart } from '../helpers/cart.helper';
+// import DeliveryContext from '../context/DeliveryContext';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
+  // const { setFullCarItens } = useContext(DeliveryContext);
+
+  // useEffect(() => {
+  //   setFullCarItens({ nome, preco, quantidade });
+  // }, [setQuantidade]);
+
+  useEffect(() => {
+    setCart({ nome, preco }, quantidade);
+  }, [quantidade]);
+
   return (
     <div>
       <p
@@ -36,12 +48,16 @@ export default function CardItem({ nome, preco, image, index }) {
         name="item_quant"
         id="input-card-quantity"
         value={ quantidade }
-        onChange={ ({ target }) => setQuantidade(Number(target.value)) }
+        onChange={ ({ target }) => {
+          setQuantidade(() => Number(target.value));
+        } }
       />
       <button
         data-testid={ `customer_products__button-card-add-item-${index}` }
         type="button"
-        onClick={ () => setQuantidade((prev) => prev + 1) }
+        onClick={ () => {
+          setQuantidade((prev) => prev + 1);
+        } }
       >
         +
       </button>

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import CardItem from '../components/cardItem';
 import Navbar from '../components/navbar';
+// import DeliveryContext from '../context/DeliveryContext';
 import { getProducts } from '../helpers/api';
+// import { setCart } from '../helpers/cart.helper';
 import { getItem } from '../helpers/localStorage.helper';
-import DeliveryProvider from '../context/DeliveryProvider';
 
 export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
+  // const { fullCarItens } = useContext(DeliveryContext);
   useEffect(() => {
     const axiosApi = async () => {
       const response = await getProducts();
@@ -19,19 +21,17 @@ export default function CustomerProducts() {
 
   return (
     <div>
-      <DeliveryProvider>
-        <Navbar name={ userLoggedName } />
-        {productData
-          .map(({ name, price, urlImage }, index) => (
-            <CardItem
-              key={ index }
-              nome={ name }
-              preco={ price }
-              image={ urlImage }
-              index={ index + 1 }
-            />
-          ))}
-      </DeliveryProvider>
+      <Navbar name={ userLoggedName } />
+      {productData
+        .map(({ name, price, urlImage }, index) => (
+          <CardItem
+            key={ index }
+            nome={ name }
+            preco={ price }
+            image={ urlImage }
+            index={ index + 1 }
+          />
+        ))}
     </div>
   );
 }

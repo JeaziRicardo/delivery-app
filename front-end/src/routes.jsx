@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import loginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
 import CustomerProducts from './pages/customerProducts';
+import DeliveryProvider from './context/DeliveryProvider';
 
 function Routes() {
   return (
@@ -12,7 +13,10 @@ function Routes() {
       </Route>
       <Route exact path="/login" component={ loginForm } />
       <Route exact path="/register" component={ RegisterForm } />
-      <Route exact path="/customer/products" component={ CustomerProducts } />
+      <DeliveryProvider>
+        <Route exact path="/customer/products" component={ CustomerProducts } />
+      </DeliveryProvider>
+
     </Switch>
   );
 }
