@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { setCart } from '../helpers/cart.helper';
+import DeliveryContext from '../context/DeliveryContext';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
+  const { setSumItem } = useContext(DeliveryContext);
 
   const useDidMountEffect = (fn, inputs) => {
     const didMountRef = useRef(false);
@@ -46,6 +48,7 @@ export default function CardItem({ nome, preco, image, index }) {
         onClick={ () => {
           setQuantidade((prev) => prev - 1);
           setCart({ nome, preco }, quantidade);
+          setSumItem({ nome, preco }, quantidade);
         } }
         disabled={ quantidade === 0 }
       >
@@ -59,6 +62,8 @@ export default function CardItem({ nome, preco, image, index }) {
         value={ quantidade }
         onChange={ ({ target }) => {
           setQuantidade(() => Number(target.value));
+          setCart({ nome, preco }, quantidade);
+          setSumItem({ nome, preco }, quantidade);
         } }
       />
       <button
@@ -67,6 +72,7 @@ export default function CardItem({ nome, preco, image, index }) {
         onClick={ () => {
           setQuantidade((prev) => prev + 1);
           setCart({ nome, preco }, quantidade);
+          setSumItem({ nome, preco }, quantidade);
         } }
       >
         +
