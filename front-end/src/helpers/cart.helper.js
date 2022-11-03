@@ -4,14 +4,8 @@ const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
 const setCart = ({ nome, preco }, quantidade) => {
   const oldArray = getCart();
   const newArray = oldArray.filter((element) => element.nome !== nome);
-  // if (operacao === 'sum') {
-
-  //   const storage = [...newArray, { nome, quantidade + 1, preco }];
-  // }
-  // const quant = quantidade - 1;
 
   const storage = [...newArray, { nome, quantidade, preco }];
-  // const storage = [...newArray, { nome, quant - 1, preco }];
 
   localStorage.setItem('cart', JSON.stringify(storage));
 };

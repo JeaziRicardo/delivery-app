@@ -10,7 +10,7 @@ export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
   const { sumItem } = useContext(DeliveryContext);
-  const getTotal = getTotalCart();
+  // const getTotal = getTotalCart();
 
   useEffect(() => {
     const axiosApi = async () => {
@@ -21,7 +21,7 @@ export default function CustomerProducts() {
   }, []);
 
   useEffect(() => {
-    setTotalValue(getTotal);
+    setTotalValue(getTotalCart());
   }, [sumItem]);
 
   const { name: userLoggedName } = getItem();
@@ -41,9 +41,9 @@ export default function CustomerProducts() {
         ))}
       <button
         type="button"
-        data-testid="customer_checkout__element-order-total-price"
+        data-testid="customer_products__checkout-bottom-value"
       >
-        {`Ver carrinho: R$ ${totalValue.toFixed(2)}`}
+        {totalValue.toFixed(2).replace('.', ',')}
       </button>
     </div>
   );
