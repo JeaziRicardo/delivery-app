@@ -10,7 +10,7 @@ import { getItem } from '../helpers/localStorage.helper';
 export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
-  const { sumItem } = useContext(DeliveryContext);
+  const { cartListItens } = useContext(DeliveryContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export default function CustomerProducts() {
   }, []);
 
   useEffect(() => {
-    setTotalValue(getTotalCart());
-  }, [sumItem]);
+    setTotalValue(getTotalCart(cartListItens));
+  }, [cartListItens]);
 
   const { name: userLoggedName } = getItem();
 
@@ -42,12 +42,18 @@ export default function CustomerProducts() {
         ))}
       <button
         type="button"
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
         onClick={ () => history.push('/customer/checkout') }
-        disabled={ Number(sumItem) === 0 }
+        disabled={ totalValue === 0 }
+      >
+        Ver Carrinho
+      </button>
+      <span
+        type="button"
+        data-testid="customer_products__checkout-bottom-value"
       >
         {totalValue.toFixed(2).replace('.', ',')}
-      </button>
+      </span>
     </div>
   );
 }

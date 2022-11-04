@@ -4,6 +4,7 @@ import loginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
 import CustomerProducts from './pages/customerProducts';
 import DeliveryProvider from './context/DeliveryProvider';
+import CheckoutProduct from './pages/checkoutProduct';
 
 function Routes() {
   return (
@@ -15,7 +16,7 @@ function Routes() {
       <Route exact path="/register" component={ RegisterForm } />
       <DeliveryProvider>
         <Route exact path="/customer/products" component={ CustomerProducts } />
-        <Route exact path="/customer/checkout" />
+        <Route exact path="/customer/checkout" component={ CheckoutProduct } />
 
       </DeliveryProvider>
 

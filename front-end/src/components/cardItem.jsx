@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { setCart } from '../helpers/cart.helper';
 import DeliveryContext from '../context/DeliveryContext';
+import { setCart } from '../helpers/cart.helper';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
-  const { setSumItem } = useContext(DeliveryContext);
+  const { setCartListItens } = useContext(DeliveryContext);
 
   const useDidMountEffect = (fn, inputs) => {
     const didMountRef = useRef(false);
@@ -20,7 +20,7 @@ export default function CardItem({ nome, preco, image, index }) {
   };
 
   useDidMountEffect(() => {
-    setCart({ nome, preco }, quantidade);
+    setCartListItens((prev) => setCart(prev, { nome, preco, quantidade }));
   }, [quantidade]);
 
   return (
@@ -46,11 +46,8 @@ export default function CardItem({ nome, preco, image, index }) {
         data-testid={ `customer_products__button-card-rm-item-${index}` }
         type="button"
         onClick={ () => {
-          setQuantidade((prev) => prev - 1);
-          setCart({ nome, preco }, quantidade);
-          setSumItem({ nome, preco }, quantidade);
+          setQuantidade((prev) => (prev === 0 ? 0 : prev - 1));
         } }
-        disabled={ quantidade === 0 }
       >
         -
       </button>
@@ -62,8 +59,6 @@ export default function CardItem({ nome, preco, image, index }) {
         value={ quantidade }
         onChange={ ({ target }) => {
           setQuantidade(() => Number(target.value));
-          setCart({ nome, preco }, quantidade);
-          setSumItem({ nome, preco }, quantidade);
         } }
       />
       <button
@@ -71,8 +66,6 @@ export default function CardItem({ nome, preco, image, index }) {
         type="button"
         onClick={ () => {
           setQuantidade((prev) => prev + 1);
-          setCart({ nome, preco }, quantidade);
-          setSumItem({ nome, preco }, quantidade);
         } }
       >
         +
