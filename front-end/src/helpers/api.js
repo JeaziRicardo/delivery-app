@@ -28,12 +28,18 @@ const getProducts = async () => instance
 const postSale = async (saleObject, token) => instance
   .post(
     'customer/checkout',
-    { saleObject },
-
+    saleObject,
     { headers: { Authorization: token } },
   ).catch((error) => {
     console.log(error);
     return null;
   });
 
-export { postLogin, postRegister, getProducts, postSale };
+const getAllSellers = async () => instance
+  .get('login')
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+export { postLogin, postRegister, getProducts, postSale, getAllSellers };

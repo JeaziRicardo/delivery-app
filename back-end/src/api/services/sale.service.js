@@ -1,11 +1,13 @@
 const { Sale } = require('../../database/models');
 const { validateToken } = require('../helpers/jwtHelper');
+const { getUserByEmail } = require('./user.service');
+
+
 
 const create = async (saleObject, token) => {
-  console.log('DENTRO SERVICE', saleObject);
-  validateToken(token);
-  const result = await Sale.create({ ...saleObject });
-  console.log('RESULT', result);
+  const { email } = validateToken(token);
+  const userId = await getUserByEmail(email);
+  const result = await Sale.create({ ...saleObject, userId });
   return result.id;
 };
 

@@ -26,6 +26,11 @@ const create = async (newUser) => {
   };
 };
 
+const getUserByEmail = async (email) => {
+  const userResult = await User.findOne({ where: { email } });
+  return userResult.id;
+};
+
 const findByEmail = async ({ email, password }) => {
   const userExists = await User.findOne({ where: { email } });
   if (!userExists) throw new CustomError(404, 'User not found');
@@ -37,4 +42,4 @@ const findByEmail = async ({ email, password }) => {
   throw new CustomError(404, 'Invalid password');
 };
 
-module.exports = { getAllUsers, findByEmail, create };
+module.exports = { getAllUsers, findByEmail, create, getUserByEmail };

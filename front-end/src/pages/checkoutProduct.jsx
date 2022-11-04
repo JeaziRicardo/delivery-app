@@ -1,27 +1,41 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import { getItem } from '../helpers/localStorage.helper';
 import { getTotalCart, removeCartItem } from '../helpers/cart.helper';
 import DeliveryContext from '../context/DeliveryContext';
-import { postSale } from '../helpers/api';
+import { getAllSellers, postSale } from '../helpers/api';
 
 export default function CheckoutProduct() {
   const { name: userLoggedName } = getItem();
   const { cartListItens, setCartListItens } = useContext(DeliveryContext);
-  const [vendedor, setVendedor] = useState('');
+  const [sellers, setSellers] = useState([]);
+  // const [choosedSeller, setChoosedSeller] = useState('');
+
   const [endereco, setEndereco] = useState('');
   const [numEndereco, setNumEndereco] = useState('');
+
+  useEffect(() => {
+    const axiosApi = async () => {
+      const response = await getAllSellers();
+      const filteredSellers = response.data.filter((user) => user.role === 'seller');
+      setSellers(filteredSellers);
+    };
+    axiosApi();
+  }, []);
 
   const history = useHistory();
 
   const sendPost = async () => {
+    // console.log('vendedor', choosedSeller);
     const saleObject = {
-      totalPrice: Number(getTotalCart(cartListItens)).toFixed(2).replace('.', ','),
+      totalPrice: Number(getTotalCart(cartListItens)).toFixed(2),
       deliveryAddress: endereco,
       deliveryNumber: numEndereco,
       status: 'Pendente',
+      sellerId: 2,
     };
+    console.log(saleObject);
     const { token } = getItem();
     const saleID = await postSale(saleObject, token);
     history.push(`/customer/orders/${saleID.data}`);
@@ -74,7 +88,7 @@ export default function CheckoutProduct() {
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                {Number(product.quantidade * product.preco).toFixed(2).replace('.', ',')}
+                {(product.quantidade * product.preco).replace('.', ',')}
               </td>
               <td>
                 <button
@@ -95,7 +109,7 @@ export default function CheckoutProduct() {
       <p
         data-testid="customer_checkout__element-order-total-price"
       >
-        {Number(getTotalCart(cartListItens)).toFixed(2).replace('.', ',')}
+        {getTotalCart(cartListItens).replace('.', ',')}
 
       </p>
       <h2>Detalhes e Endereço para Entrega</h2>
@@ -110,15 +124,15 @@ export default function CheckoutProduct() {
 
         <td>
           <select
-            value={ vendedor }
             data-testid="customer_checkout__select-seller"
+            onChange={ ({ target }) => console.log(target.value) }
           >
-            <option
-              value="a"
-              onChange={ ({ target }) => setVendedor(target.value) }
-            >
-              Fulano De Tal
-            </option>
+            {
+              sellers.map((seller, index) => (
+                <option key={ index } value={ seller.id }>
+                  {seller.name}
+                </option>))
+            }
           </select>
         </td>
         <td>
