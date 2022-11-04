@@ -10,7 +10,7 @@ export default function CheckoutProduct() {
   const { name: userLoggedName } = getItem();
   const { cartListItens, setCartListItens } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
-  // const [choosedSeller, setChoosedSeller] = useState('');
+  const [choosedSeller, setChoosedSeller] = useState('');
 
   const [endereco, setEndereco] = useState('');
   const [numEndereco, setNumEndereco] = useState('');
@@ -27,13 +27,13 @@ export default function CheckoutProduct() {
   const history = useHistory();
 
   const sendPost = async () => {
-    // console.log('vendedor', choosedSeller);
+    console.log('vendedor', choosedSeller);
     const saleObject = {
       totalPrice: Number(getTotalCart(cartListItens)).toFixed(2),
       deliveryAddress: endereco,
       deliveryNumber: numEndereco,
       status: 'Pendente',
-      sellerId: 2,
+      sellerId: choosedSeller,
     };
     console.log(saleObject);
     const { token } = getItem();
@@ -81,14 +81,14 @@ export default function CheckoutProduct() {
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                {product.preco.replace('.', ',')}
+                {Number(product.preco).replace('.', ',')}
               </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                {(product.quantidade * product.preco).replace('.', ',')}
+                {Number(product.quantidade * product.preco).replace('.', ',')}
               </td>
               <td>
                 <button
@@ -109,7 +109,7 @@ export default function CheckoutProduct() {
       <p
         data-testid="customer_checkout__element-order-total-price"
       >
-        {getTotalCart(cartListItens).replace('.', ',')}
+        {getTotalCart(cartListItens)}
 
       </p>
       <h2>Detalhes e Endereço para Entrega</h2>
@@ -125,14 +125,20 @@ export default function CheckoutProduct() {
         <td>
           <select
             data-testid="customer_checkout__select-seller"
-            onChange={ ({ target }) => console.log(target.value) }
+            onChange={ ({ target }) => setChoosedSeller(target.value) }
+            // defaultValue={ ({ target }) => setChoosedSeller(target.value) }
+            onSelectCapture={ ({ target }) => setChoosedSeller(target.value) }
           >
-            {
+            {/* {
               sellers.map((seller, index) => (
-                <option key={ index } value={ seller.id }>
+                <option
+                  key={ index }
+                  selected={ index === 0 }
+                  value={ seller.id }
+                >
                   {seller.name}
                 </option>))
-            }
+            } */}
           </select>
         </td>
         <td>
