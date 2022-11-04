@@ -74,15 +74,14 @@ export default function CheckoutProduct() {
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          <p
-            data-testid="customer_checkout__element-order-total-price"
-          >
-            {Number(getTotalCart(cartListItens)).toFixed(2).replace('.', ',')}
 
-          </p>
-        </tfoot>
       </table>
+      <p
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        {Number(getTotalCart(cartListItens)).toFixed(2).replace('.', ',')}
+
+      </p>
       <h2>Detalhes e Endereço para Entrega</h2>
       <table>
         <thead>
