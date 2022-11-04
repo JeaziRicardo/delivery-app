@@ -17,7 +17,6 @@ const validateToken = (token) => {
   } catch (error) {
     throw new CustomError(401, 'Token must be a valid token');
   }
-}
-
+};
 
 module.exports = { createToken, validateToken };
