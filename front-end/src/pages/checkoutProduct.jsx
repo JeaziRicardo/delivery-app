@@ -4,12 +4,28 @@ import Navbar from '../components/navbar';
 import { getItem } from '../helpers/localStorage.helper';
 import { getTotalCart, removeCartItem } from '../helpers/cart.helper';
 import DeliveryContext from '../context/DeliveryContext';
+import { postSale } from '../helpers/api';
 
 export default function CheckoutProduct() {
   const { name: userLoggedName } = getItem();
   const { cartListItens, setCartListItens } = useContext(DeliveryContext);
   const [vendedor, setVendedor] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [numEndereco, setNumEndereco] = useState('');
+
   const history = useHistory();
+
+  const sendPost = async () => {
+    const saleObject = {
+      totalPrice: Number(getTotalCart(cartListItens)).toFixed(2).replace('.', ','),
+      deliveryAddress: endereco,
+      deliveryNumber: numEndereco,
+      status: 'Pendente',
+    };
+    const { token } = getItem();
+    const saleID = await postSale(saleObject, token);
+    history.push(`/customer/orders/${saleID.data}`);
+  };
 
   return (
     <div>
@@ -110,15 +126,19 @@ export default function CheckoutProduct() {
             type="text"
             placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
             data-testid="customer_checkout__input-address"
+            value={ endereco }
+            onChange={ ({ target }) => setEndereco(target.value) }
           />
         </td>
         <td>
           <input
-            type="number"
+            type="text"
             name="numberAddress"
             id="numberAddress"
             placeholder="198"
             data-testid="customer_checkout__input-address-number"
+            value={ numEndereco }
+            onChange={ ({ target }) => setNumEndereco(target.value) }
           />
         </td>
 
@@ -126,7 +146,7 @@ export default function CheckoutProduct() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
-        onClick={ () => history.push('/outraRota') }
+        onClick={ () => sendPost() }
       >
         FINALIZAR PEDIDO
       </button>
