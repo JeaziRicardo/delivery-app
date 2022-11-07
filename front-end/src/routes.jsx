@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
+import OrderDetails from './pages/orderDetails';
 import CustomerProducts from './pages/customerProducts';
 import DeliveryProvider from './context/DeliveryProvider';
 import CheckoutProduct from './pages/checkoutProduct';
@@ -17,7 +18,7 @@ function Routes() {
       <DeliveryProvider>
         <Route exact path="/customer/products" component={ CustomerProducts } />
         <Route exact path="/customer/checkout" component={ CheckoutProduct } />
-        <Route exact path="/customer/orders/:id" />
+        <Route exact path="/customer/orders/:id" component={ OrderDetails } />
 
       </DeliveryProvider>
 
