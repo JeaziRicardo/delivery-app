@@ -5,7 +5,7 @@ const create = async (saleId, productId, quantity) => {
     saleId,
     productId,
     quantity,
-  }
+  };
   const result = await SalesProduct.create({ ...newSaleProduct });
   return result;
 };
