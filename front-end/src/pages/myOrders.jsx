@@ -20,7 +20,7 @@ export default function Orders() {
   return (
     <div>
       <Navbar name={ userLoggedName } />
-      {orderList.length > 1 && orderList.map(({
+      {orderList.length > 0 && orderList.map(({
         id,
         status,
         saleDate,

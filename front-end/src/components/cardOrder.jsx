@@ -12,17 +12,17 @@ export default function CardOrder({ orderId, status, date, total }) {
         {`pedido: ${orderId}`}
       </span>
       <p
-        data-testid={ `customer_orders__element-delivery-status-${status}` }
+        data-testid={ `customer_orders__element-delivery-status-${orderId}` }
       >
         {status}
       </p>
       <p
-        data-testid={ `customer_orders__element-order-date-${date}` }
+        data-testid={ `customer_orders__element-order-date-${orderId}` }
       >
         {`${day}/${month}/${year}`}
       </p>
       <p
-        data-testid={ `customer_orders__element-card-price-${total}` }
+        data-testid={ `customer_orders__element-card-price-${orderId}` }
       >
         {total.replace('.', ',')}
       </p>

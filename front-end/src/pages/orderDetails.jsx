@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import { getAllSellers, getSaleById } from '../helpers/api';
 import DeliveryContext from '../context/DeliveryContext';
+import { getItem } from '../helpers/localStorage.helper';
 
 // import { getTotalCart } from '../helpers/cart.helper';
 

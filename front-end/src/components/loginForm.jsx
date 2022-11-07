@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { postLogin } from '../helpers/api';
-import { setItem } from '../helpers/localStorage.helper';
+import { getItem, setItem } from '../helpers/localStorage.helper';
 import { loginValidation } from '../helpers/validation.helper';
-/* import { Context as LoginContext } from '../context/Provider'; */
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState('');
@@ -20,6 +19,9 @@ export default function LoginForm() {
     setItem(response.data);
     if (response.status === STATUS_OK) history.push('/customer/products');
   }
+
+  const getLoggedUser = getItem();
+  if (getLoggedUser) history.push('/customer/products');
 
   return (
     <form>
