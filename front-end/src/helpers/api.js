@@ -49,4 +49,27 @@ const getOrders = async () => instance
     return null;
   });
 
-export { postLogin, postRegister, getProducts, postSale, getAllSellers, getOrders };
+const getSaleById = async (saleId) => instance
+  .get(`customer/${saleId}`)
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+const getProductsDetails = async (saleId) => instance
+  .get(`customer/products/${saleId}`)
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+export {
+  postLogin,
+  postRegister,
+  getProducts,
+  postSale,
+  getAllSellers,
+  getOrders,
+  getSaleById,
+  getProductsDetails,
+};
