@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import { getAllSellers, getSaleById } from '../helpers/api';
 import DeliveryContext from '../context/DeliveryContext';
-import { getItem } from '../helpers/localStorage.helper';
 
 // import { getTotalCart } from '../helpers/cart.helper';
 
@@ -12,6 +11,7 @@ export default function OrderDetails() {
   const [seller, setSeller] = useState('');
   const { cartListItens } = useContext(DeliveryContext);
   const { name: userLoggedName } = getItem();
+  const [date, setDate] = useState('');
   // const [productsDetails, setProductsDetails] = useState([]);
 
   const { id } = useParams();
@@ -19,6 +19,9 @@ export default function OrderDetails() {
     const axiosApi = async () => {
       const { data } = await getSaleById(id);
       setSale(data);
+      const fullDate = data.saleDate.split('T');
+      const [year, month, day] = fullDate[0].split('-');
+      setDate(`${day}/${month}/${year}`);
 
       const getSellers = await getAllSellers();
 
@@ -28,9 +31,6 @@ export default function OrderDetails() {
     };
     axiosApi();
   }, []);
-
-  const fullDate = sale.saleDate.split('T');
-  const [year, month, day] = fullDate[0].split('-');
 
   return (
     seller
@@ -47,7 +47,7 @@ export default function OrderDetails() {
           {seller}
         </span>
         <span>
-          {`${day}/${month}/${year}`}
+          {date}
         </span>
         <span>
           {sale.status}
