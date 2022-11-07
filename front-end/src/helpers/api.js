@@ -42,4 +42,11 @@ const getAllSellers = async () => instance
     return null;
   });
 
-export { postLogin, postRegister, getProducts, postSale, getAllSellers };
+const getOrders = async () => instance
+  .get('customer')
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
+export { postLogin, postRegister, getProducts, postSale, getAllSellers, getOrders };
