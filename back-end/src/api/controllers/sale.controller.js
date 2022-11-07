@@ -17,4 +17,9 @@ const create = async (req, res) => {
   return res.status(201).json(sale);
 };
 
-module.exports = { create };
+const getAllSales = async (req, res) => {
+  const result = await saleService.getAllSales();
+  return res.status(200).json(result);
+}
+
+module.exports = { create, getAllSales };
