@@ -5,4 +5,10 @@ const getAllProducts = async () => {
   return result;
 };
 
-module.exports = { getAllProducts };
+const findOne = async (nome) => {
+  const product = await Product.findOne({ where: { name: nome }});
+  if (!product) throw new CustomError(404, 'Product not found');
+  return product.dataValues.id;
+}
+
+module.exports = { getAllProducts, findOne };
