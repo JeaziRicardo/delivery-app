@@ -1,4 +1,4 @@
-const loginValidation = ({ loginName, loginEmail, loginPassword }) => {
+export const loginValidation = ({ loginName, loginEmail, loginPassword }) => {
   const emailRegex = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   const isValidate = emailRegex.test(loginEmail);
   const MIN_PASSWORD_LENGTH = 6;
@@ -12,4 +12,9 @@ const loginValidation = ({ loginName, loginEmail, loginPassword }) => {
   );
 };
 
-export default loginValidation;
+export const addressValidation = (address, addressNumber) => {
+  const MIN_ADDRESS_LENGTH = 1;
+  const MIN_ADDRESS_NUMBER_LENGTH = 1;
+  return address.length >= MIN_ADDRESS_LENGTH
+  && Number(addressNumber) >= MIN_ADDRESS_NUMBER_LENGTH;
+};

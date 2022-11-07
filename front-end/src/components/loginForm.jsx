@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { postLogin } from '../helpers/api';
 import { setItem } from '../helpers/localStorage.helper';
-import loginValidation from '../helpers/validation.helper';
+import { loginValidation } from '../helpers/validation.helper';
 /* import { Context as LoginContext } from '../context/Provider'; */
 
 export default function LoginForm() {

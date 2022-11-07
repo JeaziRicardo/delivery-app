@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import loginValidation from '../helpers/validation.helper';
+import { loginValidation } from '../helpers/validation.helper';
 
 import { postRegister } from '../helpers/api';
 import { setItem } from '../helpers/localStorage.helper';
