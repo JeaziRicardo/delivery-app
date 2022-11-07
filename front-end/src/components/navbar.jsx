@@ -13,7 +13,7 @@ export default function Navbar({ name }) {
         Produtos
       </Link>
       <Link
-        to="/products"
+        to="/customer/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus Pedidos
