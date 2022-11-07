@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
-  // const [fullCarItens, setFullCarItens] = useState([]);
+  const [choosedSeller, setChoosedSeller] = useState('');
   const [cartListItens, setCartListItens] = useState([]);
 
   const context = useMemo(() => {
-    const values = { cartListItens, setCartListItens };
+    const values = { cartListItens, setCartListItens, choosedSeller, setChoosedSeller };
     return values;
-  }, [cartListItens, setCartListItens]);
+  }, [cartListItens, setCartListItens, choosedSeller, setChoosedSeller]);
 
   return (
     <DeliveryContext.Provider value={ context }>
