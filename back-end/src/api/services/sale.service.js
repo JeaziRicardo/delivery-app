@@ -11,4 +11,9 @@ const create = async (saleObject, token) => {
   return result;
 };
 
-module.exports = { create };
+const getSaleById = async (saleId) => {
+  const result = await Sale.findOne({ where: { id: saleId } });
+  return result;
+};
+
+module.exports = { create, getSaleById };

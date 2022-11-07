@@ -10,4 +10,9 @@ const create = async (saleId, productId, quantity) => {
   return result;
 };
 
-module.exports = { create };
+const getBySaleId = async (saleId) => {
+  const result = await SalesProduct.findAll({ where: { saleId } });
+  return result;
+};
+
+module.exports = { create, getBySaleId };
