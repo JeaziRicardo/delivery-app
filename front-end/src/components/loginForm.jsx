@@ -9,19 +9,21 @@ export default function LoginForm() {
   const [loginPassword, setLoginPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
   const history = useHistory();
+  const storage = getItem();
 
   async function sendLoginForm() {
-    const STATUS_OK = 200;
     const formLogin = { email: loginEmail, password: loginPassword };
     const response = await postLogin(formLogin);
 
     if (response === null) setInvalidEmail(true);
     setItem(response.data);
-    if (response.status === STATUS_OK) history.push('/customer/products');
+
+    if (response.data.role === 'customer') {
+      history.push('/customer/products');
+    } else history.push('/seller/orders');
   }
 
-  const getLoggedUser = getItem();
-  if (getLoggedUser) history.push('/customer/products');
+  if (storage) history.push('/customer/products');
 
   return (
     <form>
