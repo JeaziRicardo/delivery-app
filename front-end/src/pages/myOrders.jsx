@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CardOrder from '../components/cardOrder';
 import Navbar from '../components/navbar';
 import { getOrders } from '../helpers/api';
@@ -26,13 +27,14 @@ export default function Orders() {
         saleDate,
         totalPrice,
       }, index) => (
-        <CardOrder
-          key={ index }
-          orderId={ id }
-          status={ status }
-          date={ saleDate }
-          total={ totalPrice }
-        />
+        <Link key={ index } to={ `/customer/orders/${index + 1}` }>
+          <CardOrder
+            orderId={ id }
+            status={ status }
+            date={ saleDate }
+            total={ totalPrice }
+          />
+        </Link>
       ))}
     </div>
   );
