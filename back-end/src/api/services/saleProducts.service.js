@@ -28,11 +28,13 @@ const getFullSale = async (saleId) => {
 };
 
 const getSaleByUser = async (email) => {
-  const userId = await getIdByEmail(email);
+  const { role, id } = await getIdByEmail(email);
+  
+  const userRole = role === 'customer' ? { userId: id } : { sellerId: id };
   const result = await Sale
     .findAll(
       {
-        where: { userId },
+        where: userRole,
         include: { model: Product, as: 'sales', attributes: { exclude: ['urlImage', 'id'] } },
       },
     );
