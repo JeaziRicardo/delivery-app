@@ -1,4 +1,5 @@
 const { SalesProduct, Sale, Product } = require('../../database/models');
+const { getIdByEmail } = require('./user.service');
 
 const create = async (saleId, productId, quantity) => {
   const newSaleProduct = {
@@ -26,6 +27,18 @@ const getFullSale = async (saleId) => {
   return result;
 };
 
+const getSaleByUser = async (email) => {
+  const userId = await getIdByEmail(email);
+  const result = await Sale
+    .findAll(
+      {
+        where: { userId },
+        include: { model: Product, as: 'sales', attributes: { exclude: ['urlImage', 'id'] } },
+      },
+    );
+  return result;
+};
+
 const updateSaleStatus = async (id, status) => {
   const result = await Sale.update(
     {
@@ -39,4 +52,4 @@ const updateSaleStatus = async (id, status) => {
   return result;
 };
 
-module.exports = { create, getBySaleId, getFullSale, updateSaleStatus };
+module.exports = { create, getBySaleId, getFullSale, updateSaleStatus, getSaleByUser };
