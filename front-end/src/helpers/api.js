@@ -42,6 +42,13 @@ const getAllSellers = async () => instance
     return null;
   });
 
+const getSellerById = async (sellerId) => instance
+  .get(`login/${sellerId}`)
+  .catch((error) => {
+    console.log(error);
+    return null;
+  });
+
 const getOrders = async () => instance
   .get('customer')
   .catch((error) => {
@@ -50,14 +57,14 @@ const getOrders = async () => instance
   });
 
 const getSaleById = async (saleId) => instance
-  .get(`customer/${saleId}`)
+  .get(`sales/${saleId}`)
   .catch((error) => {
     console.log(error);
     return null;
   });
 
-const getProductsDetails = async (saleId) => instance
-  .get(`customer/products/${saleId}`)
+const updateSaleStatus = async (saleId, status) => instance
+  .put(`sales/${saleId}`, { status })
   .catch((error) => {
     console.log(error);
     return null;
@@ -71,5 +78,6 @@ export {
   getAllSellers,
   getOrders,
   getSaleById,
-  getProductsDetails,
+  getSellerById,
+  updateSaleStatus,
 };
