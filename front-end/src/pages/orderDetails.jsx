@@ -19,8 +19,6 @@ export default function OrderDetails() {
       setSaleData(data[0]);
       setDelivered(data[0].status);
       const getSeller = await getSellerById(data[0].sellerId);
-
-      console.log(getSeller.data);
       setSeller(getSeller.data.name);
     };
     axiosApi();
