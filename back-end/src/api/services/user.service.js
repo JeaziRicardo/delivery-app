@@ -48,4 +48,9 @@ const findByEmail = async ({ email, password }) => {
   throw new CustomError(404, 'Invalid password');
 };
 
-module.exports = { getAllUsers, findByEmail, create, getUserByEmail, getUserById };
+const getIdByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  return user.id;
+};
+
+module.exports = { getAllUsers, findByEmail, create, getUserByEmail, getUserById, getIdByEmail };
