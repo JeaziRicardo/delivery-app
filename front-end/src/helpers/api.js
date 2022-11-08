@@ -49,8 +49,8 @@ const getSellerById = async (sellerId) => instance
     return null;
   });
 
-const getOrders = async () => instance
-  .get('customer')
+const getOrders = async (email) => instance
+  .get(`customer/orders/${email}`)
   .catch((error) => {
     console.log(error);
     return null;
