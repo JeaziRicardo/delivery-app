@@ -42,12 +42,11 @@ export default function SaleForm() {
     <div>
       <form>
         <label htmlFor="seller">
-          <span>P.Vendeora Responsável</span>
+          <span>P.Vendedora Responsável</span>
           <select
             name="seller"
             data-testid="customer_checkout__select-seller"
             onChange={ ({ target }) => {
-              console.log(target.value);
               setChoosedSeller(target.value);
             } }
             defaultValue={ choosedSeller }
