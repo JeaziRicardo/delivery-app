@@ -31,6 +31,12 @@ const getUserByEmail = async (email) => {
   return userResult.id;
 };
 
+const getUserById = async (id) => {
+  const user = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
+  if (!user) throw new CustomError(404, 'User not found');
+  return user;
+};
+
 const findByEmail = async ({ email, password }) => {
   const userExists = await User.findOne({ where: { email } });
   if (!userExists) throw new CustomError(404, 'User not found');
@@ -42,4 +48,4 @@ const findByEmail = async ({ email, password }) => {
   throw new CustomError(404, 'Invalid password');
 };
 
-module.exports = { getAllUsers, findByEmail, create, getUserByEmail };
+module.exports = { getAllUsers, findByEmail, create, getUserByEmail, getUserById };
