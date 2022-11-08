@@ -18,7 +18,7 @@ app.use('/login', cors(), loginRouter);
 app.use('/register', cors(), registerRouter);
 app.use('/products', cors(), productRouter);
 app.use('/customer', cors(), saleRouter);
-app.use('/test', cors(), salesProductRoute);
+app.use('/sales', cors(), salesProductRoute);
 
 app.use(errorMiddleware);
 

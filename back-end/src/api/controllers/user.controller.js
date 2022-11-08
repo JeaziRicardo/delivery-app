@@ -16,8 +16,16 @@ const create = async (req, res) => {
   res.status(201).json(user);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const result = await userService.getUserById(id);
+  if (!result) return res.status(400).end();
+  return res.status(200).json(result);
+};
+
 module.exports = {
   getAllUsers,
   findByEmail,
   create,
+  findById,
 };

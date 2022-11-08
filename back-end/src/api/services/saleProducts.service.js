@@ -16,8 +16,27 @@ const getBySaleId = async (saleId) => {
 };
 
 const getFullSale = async (saleId) => {
-  const result = await Sale.findAll({ where: { id: saleId }, include: { model: Product, as: 'sales', attributes: { exclude: ['urlImage', 'id'] } } });
+  const result = await Sale
+    .findAll(
+      {
+        where: { id: saleId },
+        include: { model: Product, as: 'sales', attributes: { exclude: ['urlImage', 'id'] } },
+      },
+    );
   return result;
-}
+};
 
-module.exports = { create, getBySaleId, getFullSale };
+const updateSaleStatus = async (id, status) => {
+  const result = await Sale.update(
+    {
+      status,
+    },
+    {
+      where: { id },
+    },
+  );
+
+  return result;
+};
+
+module.exports = { create, getBySaleId, getFullSale, updateSaleStatus };
