@@ -7,12 +7,14 @@ export default function Navbar({ name }) {
   const { role } = getItem();
   return (
     <nav>
-      <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        Produtos
-      </Link>
+      {role === 'customer' && (
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          Produtos
+        </Link>
+      )}
       <Link
         to={ `/${role}/orders` }
         data-testid="customer_products__element-navbar-link-orders"
