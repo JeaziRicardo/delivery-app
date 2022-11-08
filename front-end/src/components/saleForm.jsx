@@ -35,7 +35,7 @@ export default function SaleForm() {
     };
     const { token } = getItem();
     const { data } = await postSale(saleObject, token);
-    history.push(`/customer/orders/${data.id}`);
+    history.push(`/customer/orders/${data.id}`, { from: 'checkout page' });
   };
 
   return (

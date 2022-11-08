@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import { getSaleById, getSellerById, updateSaleStatus } from '../helpers/api';
-// import DeliveryContext from '../context/DeliveryContext';
-import { getItem } from '../helpers/localStorage.helper';
 
-// import { getTotalCart } from '../helpers/cart.helper';
+import { getItem } from '../helpers/localStorage.helper';
 
 export default function OrderDetails() {
   const [saleData, setSaleData] = useState({});
   const [seller, setSeller] = useState('');
-  // const { cartListItens } = useContext(DeliveryContext);
   const { name: userLoggedName } = getItem();
-  // const [productsDetails, setProductsDetails] = useState([]);
-  const [delivered, setDelivered] = useState(false);
+  const [delivered, setDelivered] = useState('Pendente');
+  const { location: { state } } = useHistory();
 
   const { id } = useParams();
   useEffect(() => {
     const axiosApi = async () => {
       const { data } = await getSaleById(id);
       setSaleData(data[0]);
-      console.log(data[0]);
-
+      setDelivered(data[0].status);
       const getSeller = await getSellerById(data[0].sellerId);
 
       console.log(getSeller.data);
@@ -31,7 +27,7 @@ export default function OrderDetails() {
   }, []);
 
   useEffect(() => {
-    if (delivered) {
+    if (delivered === 'Entregue') {
       const axiosApi = async () => {
         await updateSaleStatus(id, 'Entregue');
       };
@@ -74,13 +70,13 @@ export default function OrderDetails() {
             `customer_order_details__element-order-details-label-delivery-status${id}`
           }
         >
-          {delivered ? 'Entregue' : saleData.status}
+          {delivered}
         </span>
         <button
           type="button"
-          onClick={ () => setDelivered(true) }
-          // disabled={ saleData.status !== 'Pendente' || delivered }
+          onClick={ () => setDelivered('Entregue') }
           data-testid="customer_order_details__button-delivery-check"
+          disabled={ state || delivered === 'Entregue' }
         >
           MARCAR COMO ENTREGUE
         </button>
