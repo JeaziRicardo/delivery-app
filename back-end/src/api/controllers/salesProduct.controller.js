@@ -11,8 +11,7 @@ const getSaleByUser = async (req, res) => {
   const { id } = req.params;
   const result = await salesProductsService.getSaleByUser(id);
   return res.status(200).json(result);
-
-}
+};
 
 const updateSaleStatus = async (req, res) => {
   const { id } = req.params;
