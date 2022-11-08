@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { clearStorage } from '../helpers/localStorage.helper';
+import { clearStorage, getItem } from '../helpers/localStorage.helper';
 
 export default function Navbar({ name }) {
+  const { role } = getItem();
   return (
     <nav>
       <Link
@@ -13,7 +14,7 @@ export default function Navbar({ name }) {
         Produtos
       </Link>
       <Link
-        to="/customer/orders"
+        to={ `/${role}/orders` }
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus Pedidos

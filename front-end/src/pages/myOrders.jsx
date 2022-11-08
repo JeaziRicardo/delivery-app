@@ -7,10 +7,10 @@ import { getItem } from '../helpers/localStorage.helper';
 
 export default function Orders() {
   const [orderList, setOrderList] = useState([]);
+  const { role, email } = getItem();
   useEffect(() => {
     const axiosApi = async () => {
-      const response = await getOrders();
-      console.log(response.data);
+      const response = await getOrders(email);
       setOrderList(response.data);
     };
     axiosApi();
@@ -26,13 +26,18 @@ export default function Orders() {
         status,
         saleDate,
         totalPrice,
+        deliveryAddress,
+        deliveryNumber,
       }, index) => (
-        <Link key={ index } to={ `/customer/orders/${index + 1}` }>
+        <Link key={ index } to={ `/${role}/orders/${index + 1}` }>
           <CardOrder
             orderId={ id }
             status={ status }
             date={ saleDate }
             total={ totalPrice }
+            delivery={ `
+              ${deliveryAddress}, ${deliveryNumber}
+            ` }
           />
         </Link>
       ))}
