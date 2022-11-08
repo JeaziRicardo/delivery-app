@@ -50,7 +50,7 @@ const findByEmail = async ({ email, password }) => {
 
 const getIdByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
-  return user.id;
+  return user;
 };
 
 module.exports = { getAllUsers, findByEmail, create, getUserByEmail, getUserById, getIdByEmail };
