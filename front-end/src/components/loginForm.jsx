@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { postLogin } from '../helpers/api';
 import { getItem, setItem } from '../helpers/localStorage.helper';
 import { loginValidation } from '../helpers/validation.helper';
+import { Form } from '../style/Form';
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState('');
@@ -26,10 +27,9 @@ export default function LoginForm() {
   if (storage) history.push('/customer/products');
 
   return (
-    <form>
-      <h1>LOGIN</h1>
+    <Form>
       <label htmlFor="email">
-        <span>Login</span>
+        <span>Email</span>
         <input
           type="email"
           id="email"
@@ -73,6 +73,6 @@ export default function LoginForm() {
       </button>
       { invalidEmail
         && <span data-testid="common_login__element-invalid-email">Invalid email</span>}
-    </form>
+    </Form>
   );
 }

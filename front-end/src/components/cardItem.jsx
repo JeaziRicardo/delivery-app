@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
 import { setCart } from '../helpers/cart.helper';
+import { Item } from '../style/customerProducts';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
@@ -24,7 +25,12 @@ export default function CardItem({ nome, preco, image, index }) {
   }, [quantidade]);
 
   return (
-    <div>
+    <Item>
+      <img
+        data-testid={ `customer_products__img-card-bg-image-${index}` }
+        src={ image }
+        alt={ image }
+      />
       <p
         data-testid={ `customer_products__element-card-title-${index}` }
       >
@@ -36,41 +42,37 @@ export default function CardItem({ nome, preco, image, index }) {
       >
         {preco.replace('.', ',')}
       </p>
-      <img
-        data-testid={ `customer_products__img-card-bg-image-${index}` }
-        src={ image }
-        alt={ image }
-        width="50"
-      />
-      <button
-        data-testid={ `customer_products__button-card-rm-item-${index}` }
-        type="button"
-        onClick={ () => {
-          setQuantidade((prev) => (prev === 0 ? 0 : prev - 1));
-        } }
-      >
-        -
-      </button>
-      <input
-        data-testid={ `customer_products__input-card-quantity-${index}` }
-        type="number"
-        name="item_quant"
-        id="input-card-quantity"
-        value={ quantidade }
-        onChange={ ({ target }) => {
-          setQuantidade(() => Number(target.value));
-        } }
-      />
-      <button
-        data-testid={ `customer_products__button-card-add-item-${index}` }
-        type="button"
-        onClick={ () => {
-          setQuantidade((prev) => prev + 1);
-        } }
-      >
-        +
-      </button>
-    </div>
+      <div>
+        <button
+          data-testid={ `customer_products__button-card-rm-item-${index}` }
+          type="button"
+          onClick={ () => {
+            setQuantidade((prev) => (prev === 0 ? 0 : prev - 1));
+          } }
+        >
+          -
+        </button>
+        <input
+          data-testid={ `customer_products__input-card-quantity-${index}` }
+          type="number"
+          name="item_quant"
+          id="input-card-quantity"
+          value={ quantidade }
+          onChange={ ({ target }) => {
+            setQuantidade(() => Number(target.value));
+          } }
+        />
+        <button
+          data-testid={ `customer_products__button-card-add-item-${index}` }
+          type="button"
+          onClick={ () => {
+            setQuantidade((prev) => prev + 1);
+          } }
+        >
+          +
+        </button>
+      </div>
+    </Item>
   );
 }
 

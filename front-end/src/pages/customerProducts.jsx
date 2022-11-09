@@ -6,6 +6,7 @@ import DeliveryContext from '../context/DeliveryContext';
 import { getProducts } from '../helpers/api';
 import { getTotalCart } from '../helpers/cart.helper';
 import { getItem } from '../helpers/localStorage.helper';
+import { ContainerItems } from '../style/customerProducts';
 
 export default function CustomerProducts() {
   const [productData, setProductData] = useState([]);
@@ -30,16 +31,18 @@ export default function CustomerProducts() {
   return (
     <div>
       <Navbar name={ userLoggedName } />
-      {productData
-        .map(({ name, price, urlImage }, index) => (
-          <CardItem
-            key={ index }
-            nome={ name }
-            preco={ price }
-            image={ urlImage }
-            index={ index + 1 }
-          />
-        ))}
+      <ContainerItems>
+        {productData
+          .map(({ name, price, urlImage }, index) => (
+            <CardItem
+              key={ index }
+              nome={ name }
+              preco={ price }
+              image={ urlImage }
+              index={ index + 1 }
+            />
+          ))}
+      </ContainerItems>
       <button
         type="button"
         data-testid="customer_products__button-cart"
