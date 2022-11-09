@@ -8,8 +8,8 @@ import { getItem } from '../helpers/localStorage.helper';
 export default function OrderDetails() {
   const [saleData, setSaleData] = useState({});
   const [seller, setSeller] = useState('');
-  const { name: userLoggedName } = getItem();
-  const [delivered, setDelivered] = useState('Pendente');
+  const { name: userLoggedName, role } = getItem();
+  const [status, setStatus] = useState('Pendente');
   const { location: { state } } = useHistory();
 
   const { id } = useParams();
@@ -17,7 +17,7 @@ export default function OrderDetails() {
     const axiosApi = async () => {
       const { data } = await getSaleById(id);
       setSaleData(data[0]);
-      setDelivered(data[0].status);
+      setStatus(data[0].status);
       const getSeller = await getSellerById(data[0].sellerId);
       setSeller(getSeller.data.name);
     };
@@ -25,13 +25,13 @@ export default function OrderDetails() {
   }, []);
 
   useEffect(() => {
-    if (delivered === 'Entregue') {
+    if (status !== 'Pendente') {
       const axiosApi = async () => {
-        await updateSaleStatus(id, 'Entregue');
+        await updateSaleStatus(id, status);
       };
       axiosApi();
     }
-  }, [delivered]);
+  }, [status]);
 
   let [year, month, day] = [];
 
@@ -47,37 +47,60 @@ export default function OrderDetails() {
         <Navbar name={ userLoggedName } />
         <h1>Detalhes do Pedido</h1>
         <span
-          data-testid="customer_order_details__element-order-details-label-order-id"
+          data-testid={ `${role}_order_details__element-order-details-label-order-id` }
         >
           Pedido -
           {id}
         </span>
+        {role === 'customer' && (
+          <span
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
+            P.Vendedora -
+            {seller}
+          </span>
+        )}
         <span
-          data-testid="customer_order_details__element-order-details-label-seller-name"
-        >
-          P.Vendedora -
-          {seller}
-        </span>
-        <span
-          data-testid="customer_order_details__element-order-details-label-order-date"
+          data-testid={ `${role}_order_details__element-order-details-label-order-date` }
         >
           { `${day}/${month}/${year}` }
         </span>
         <span
           data-testid={
-            `customer_order_details__element-order-details-label-delivery-status${id}`
+            `${role}_order_details__element-order-details-label-delivery-status${id}`
           }
         >
-          {delivered}
+          {status}
         </span>
-        <button
-          type="button"
-          onClick={ () => setDelivered('Entregue') }
-          data-testid="customer_order_details__button-delivery-check"
-          disabled={ state || delivered === 'Entregue' }
-        >
-          MARCAR COMO ENTREGUE
-        </button>
+        { role === 'customer' ? (
+          <button
+            type="button"
+            onClick={ () => setStatus('Entregue') }
+            data-testid="customer_order_details__button-delivery-check"
+            disabled={ state || status !== 'Em Trânsito' }
+          >
+            MARCAR COMO ENTREGUE
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={ () => setStatus('Preparando') }
+              data-testid="seller_order_details__button-preparing-check"
+              disabled={ status !== 'Pendente' }
+            >
+              PREPARAR PEDIDO
+            </button>
+            <button
+              type="button"
+              onClick={ () => setStatus('Em Trânsito') }
+              data-testid="seller_order_details__button-dispatch-check"
+              disabled={ status !== 'Preparando' }
+            >
+              SAIU PARA ENTREGA
+            </button>
+          </>
+        )}
         <table>
           <thead>
             <tr>
@@ -93,35 +116,35 @@ export default function OrderDetails() {
               <tr key={ index }>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-item-number-${index}`
+                    `${role}_order_details__element-order-table-item-number-${index}`
                   }
                 >
                   {index + 1}
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-name-${index}`
+                    `${role}_order_details__element-order-table-name-${index}`
                   }
                 >
                   {product.name}
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-quantity-${index}`
+                    `${role}_order_details__element-order-table-quantity-${index}`
                   }
                 >
                   {product.SalesProduct.quantity}
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-unit-price-${index}`
+                    `${role}_order_details__element-order-table-unit-price-${index}`
                   }
                 >
                   {product.price}
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-sub-total-${index}`
+                    `${role}_order_details__element-order-table-sub-total-${index}`
                   }
                 >
                   {(product.SalesProduct.quantity * product.price).toFixed(2)}
@@ -132,7 +155,7 @@ export default function OrderDetails() {
         </table>
         Valor Total:
         <span
-          data-testid="customer_order_details__element-order-total-price"
+          data-testid={ `${role}_order_details__element-order-total-price` }
         >
           {(saleData.totalPrice).replace('.', ',')}
         </span>
