@@ -21,7 +21,7 @@ export default function CardItem({ nome, preco, image, index }) {
   };
 
   useDidMountEffect(() => {
-    setCartListItens((prev) => setCart(prev, { nome, preco, quantidade }));
+    setCartListItens((prev) => setCart(prev, { nome, preco, quantidade, image }));
   }, [quantidade]);
 
   return (

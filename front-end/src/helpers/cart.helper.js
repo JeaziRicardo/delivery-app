@@ -3,11 +3,11 @@ const removeCartItem = (cartList, nome) => {
   return newCartList;
 };
 
-const setCart = (cartList = [], { nome, preco, quantidade }) => {
+const setCart = (cartList = [], { nome, preco, quantidade, image }) => {
   const newCartList = removeCartItem(cartList, nome);
 
   if (quantidade !== 0) {
-    const storage = [...newCartList, { nome, quantidade, preco }];
+    const storage = [...newCartList, { nome, quantidade, preco, image }];
 
     return storage;
   }
