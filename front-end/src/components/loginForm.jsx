@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { postLogin } from '../helpers/api';
 import { getItem, setItem } from '../helpers/localStorage.helper';
 import { loginValidation } from '../helpers/validation.helper';
@@ -8,6 +9,7 @@ import { Form } from '../style/Form';
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [eye, setEye] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const history = useHistory();
   const storage = getItem();
@@ -43,8 +45,10 @@ export default function LoginForm() {
 
       <label htmlFor="password">
         <span>Senha</span>
+        { eye ? <AiFillEye onClick={ () => setEye(!eye) } />
+          : <AiFillEyeInvisible onClick={ () => setEye(!eye) } /> }
         <input
-          type="password"
+          type={ eye ? 'text' : 'password' }
           id="password"
           data-testid="common_login__input-password"
           onChange={ ({ target }) => {

@@ -21,6 +21,7 @@ export const Form = styled.form`
   height: 300px;
   justify-content: space-evenly;
   width: 300px;
+
   label {
     display: flex;
     flex-direction: column;
@@ -36,6 +37,7 @@ export const Form = styled.form`
       background-color: white;
     }
   }
+
   button {
     /* border: 1px solid red; */
     height: 40px;
@@ -52,7 +54,20 @@ export const Form = styled.form`
       background-color: var(--desabilitado)
     }
   }
+
   span:last-child {
     color: red;
   }
+
+  svg {
+    color: red;
+    cursor: pointer;
+    height: 25px;
+    margin-left: 210px;
+    margin-top: 25px;
+    position: fixed;
+    width: 50px;
+    z-index: 2;
+  }
+
 `;
