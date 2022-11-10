@@ -10,7 +10,7 @@ export default function CheckoutProduct() {
   const { cartListItens, setCartListItens } = useContext(DeliveryContext);
 
   return (
-    <div>
+    <div style={ { border: '1px solid red' } }>
       <Navbar name={ userLoggedName } />
       <h2>Finalizar Pedido</h2>
       <table>

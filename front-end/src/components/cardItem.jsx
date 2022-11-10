@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
 import { setCart } from '../helpers/cart.helper';
-import { Item } from '../style/customerProducts';
+import { Item } from '../style/CustomerProducts';
 
 export default function CardItem({ nome, preco, image, index }) {
   const [quantidade, setQuantidade] = useState(0);
@@ -31,6 +31,7 @@ export default function CardItem({ nome, preco, image, index }) {
         src={ image }
         alt={ image }
       />
+      <hr />
       <p
         data-testid={ `customer_products__element-card-title-${index}` }
       >
@@ -40,12 +41,13 @@ export default function CardItem({ nome, preco, image, index }) {
       <p
         data-testid={ `customer_products__element-card-price-${index}` }
       >
-        {preco.replace('.', ',')}
+        {`R$ ${preco.replace('.', ',')}`}
       </p>
       <div>
         <button
           data-testid={ `customer_products__button-card-rm-item-${index}` }
           type="button"
+          disabled={ quantidade === 0 }
           onClick={ () => {
             setQuantidade((prev) => (prev === 0 ? 0 : prev - 1));
           } }

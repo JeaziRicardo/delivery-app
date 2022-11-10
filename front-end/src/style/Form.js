@@ -40,13 +40,13 @@ export const Form = styled.form`
     /* border: 1px solid red; */
     height: 40px;
     width : 250px;
-    cursor: pointer;
     background-color: var(--destaque);
     box-shadow: 0px 0.8px 2px var(--sombra);
     border: none;
     border-radius: 4px;
-    :hover {
+    :hover:enabled {
       background-color: white;
+      color: var(--destaque);
     }
     :disabled {
       background-color: var(--desabilitado)
