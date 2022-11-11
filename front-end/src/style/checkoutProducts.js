@@ -5,13 +5,13 @@ export const ContainerCheckout = styled.div`
 `;
 
 export const ContainerForm = styled.div`
-  align-items: center;
-  border: 1px solid blue;
+  /* align-items: center; */
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   table {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-bottom: 10px;
     width: 90vw;
     img {
@@ -19,8 +19,17 @@ export const ContainerForm = styled.div`
       width: 30px;
     }
   }
-  .totalPrice {
-    align-items: flex-end;
-    border: 1px solid green;
+  .remove-btn {
+    background-color: #fff;
+    border: none;
   }
+  .totalPrice {
+    align-self: flex-end;
+    background-color: var(--destaque);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+
 `;

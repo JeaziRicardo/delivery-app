@@ -5,6 +5,7 @@ import { getItem } from '../helpers/localStorage.helper';
 import { getTotalCart } from '../helpers/cart.helper';
 import DeliveryContext from '../context/DeliveryContext';
 import { addressValidation } from '../helpers/validation.helper';
+import DeliveryDetails from '../style/DeliveryDetails';
 
 export default function SaleForm() {
   const { cartListItens } = useContext(DeliveryContext);
@@ -39,7 +40,7 @@ export default function SaleForm() {
   };
 
   return (
-    <div>
+    <DeliveryDetails>
       <form>
         <label htmlFor="seller">
           <span>P.Vendedora Responsável</span>
@@ -64,9 +65,11 @@ export default function SaleForm() {
           </select>
         </label>
         <label htmlFor="address">
+          Endereço
           <input
             name="address"
             type="text"
+            className="address"
             placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
             data-testid="customer_checkout__input-address"
             value={ endereco }
@@ -74,9 +77,11 @@ export default function SaleForm() {
           />
         </label>
         <label htmlFor="address-number">
+          Número
           <input
             type="text"
             name="address-number"
+            className="address-number"
             id="address-number"
             placeholder="198"
             data-testid="customer_checkout__input-address-number"
@@ -86,12 +91,13 @@ export default function SaleForm() {
         </label>
         <button
           type="button"
+          className="checkoutOrder"
           data-testid="customer_checkout__button-submit-order"
           onClick={ () => addressValidation(endereco, numEndereco) && sendPost() }
         >
           FINALIZAR PEDIDO
         </button>
       </form>
-    </div>
+    </DeliveryDetails>
   );
 }
