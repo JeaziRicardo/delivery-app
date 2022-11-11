@@ -1,32 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getItem } from '../helpers/localStorage.helper';
+import { CardOrderItem } from '../style/OrderDetails';
 
 export default function CardOrder({ orderId, status, date, total, delivery }) {
   const fullDate = date.split('T');
   const [year, month, day] = fullDate[0].split('-');
+  const [monthName, dateName] = new Date(`${month}/${day}/${year}`)
+    .toLocaleDateString('pt-br', { weekday: 'long', month: 'long' }).split(' ');
   const { role } = getItem();
   return (
-    <div style={ { border: '1px solid blue', margin: '20px 0', width: '350px' } }>
-      <span
-        data-testid={ `${role}_orders__element-order-id-${orderId}` }
-      >
-        {`pedido: ${orderId}`}
-      </span>
+    <CardOrderItem>
       <p
-        data-testid={ `${role}_orders__element-delivery-status-${orderId}` }
-      >
-        {status}
-      </p>
-      <p
+        className="date-card"
         data-testid={ `${role}_orders__element-order-date-${orderId}` }
       >
-        {`${day}/${month}/${year}`}
+        {`${dateName[0].toUpperCase() + dateName.substring(1)}, ${day} de ${monthName}. `}
       </p>
+      <span
+        className="order-id"
+        data-testid={ `${role}_orders__element-order-id-${orderId}` }
+      >
+        {`ID: 000${orderId}`}
+      </span>
+      <div className="middle-info">
+        <p>Fornececido por IDelivery</p>
+        <p
+          data-testid={ `${role}_orders__element-delivery-status-${orderId}` }
+        >
+          {`${status} >`}
+        </p>
+      </div>
+
       <p
         data-testid={ `${role}_orders__element-card-price-${orderId}` }
       >
-        {total.replace('.', ',')}
+        {`R$ ${total.replace('.', ',')}`}
       </p>
       {role === 'seller'
       && (
@@ -36,7 +45,8 @@ export default function CardOrder({ orderId, status, date, total, delivery }) {
           {delivery}
         </p>
       )}
-    </div>
+      <hr />
+    </CardOrderItem>
   );
 }
 

@@ -4,6 +4,7 @@ import CardOrder from '../components/cardOrder';
 import Navbar from '../components/navbar';
 import { getOrders } from '../helpers/api';
 import { getItem } from '../helpers/localStorage.helper';
+import { ContainerDetails, DetailsList } from '../style/OrderDetails';
 
 export default function Orders() {
   const [orderList, setOrderList] = useState([]);
@@ -21,26 +22,32 @@ export default function Orders() {
   return (
     <div>
       <Navbar name={ userLoggedName } />
-      {orderList.length > 0 && orderList.map(({
-        id,
-        status,
-        saleDate,
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber,
-      }, index) => (
-        <Link key={ index } to={ `/${role}/orders/${index + 1}` }>
-          <CardOrder
-            orderId={ id }
-            status={ status }
-            date={ saleDate }
-            total={ totalPrice }
-            delivery={ `
-              ${deliveryAddress}, ${deliveryNumber}
-            ` }
-          />
-        </Link>
-      ))}
+      <ContainerDetails>
+        <h2>Todos os Pedidos</h2>
+        <p>pela data de entrega mais recente</p>
+        <DetailsList>
+          {orderList.length > 0 && orderList.map(({
+            id,
+            status,
+            saleDate,
+            totalPrice,
+            deliveryAddress,
+            deliveryNumber,
+          }, index) => (
+            <Link key={ index } to={ `/${role}/orders/${index + 1}` }>
+              <CardOrder
+                orderId={ id }
+                status={ status }
+                date={ saleDate }
+                total={ totalPrice }
+                delivery={ `
+                  ${deliveryAddress}, ${deliveryNumber}
+                ` }
+              />
+            </Link>
+          ))}
+        </DetailsList>
+      </ContainerDetails>
     </div>
   );
 }

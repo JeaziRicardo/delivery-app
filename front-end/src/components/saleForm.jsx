@@ -8,7 +8,7 @@ import { addressValidation } from '../helpers/validation.helper';
 import DeliveryDetails from '../style/DeliveryDetails';
 
 export default function SaleForm() {
-  const { cartListItens } = useContext(DeliveryContext);
+  const { cartListItens, setCartListItens } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const [choosedSeller, setChoosedSeller] = useState(2);
   const [endereco, setEndereco] = useState('');
@@ -36,6 +36,7 @@ export default function SaleForm() {
     };
     const { token } = getItem();
     const { data } = await postSale(saleObject, token);
+    setCartListItens([]);
     history.push(`/customer/orders/${data.id}`, { from: 'checkout page' });
   };
 
