@@ -42,8 +42,9 @@ export default function SaleForm() {
   return (
     <DeliveryDetails>
       <form>
+        <h2>Detalhes para Entrega</h2>
         <label htmlFor="seller">
-          <span>P.Vendedora Responsável</span>
+          <span>Vendedora Responsável</span>
           <select
             name="seller"
             data-testid="customer_checkout__select-seller"
@@ -66,28 +67,27 @@ export default function SaleForm() {
         </label>
         <label htmlFor="address">
           Endereço
-          <input
-            name="address"
-            type="text"
-            className="address"
-            placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
-            data-testid="customer_checkout__input-address"
-            value={ endereco }
-            onChange={ ({ target }) => setEndereco(target.value) }
-          />
-        </label>
-        <label htmlFor="address-number">
-          Número
-          <input
-            type="text"
-            name="address-number"
-            className="address-number"
-            id="address-number"
-            placeholder="198"
-            data-testid="customer_checkout__input-address-number"
-            value={ numEndereco }
-            onChange={ ({ target }) => setNumEndereco(target.value) }
-          />
+          <div>
+            <input
+              name="address"
+              type="text"
+              className="address"
+              placeholder="Rua do Bobos"
+              data-testid="customer_checkout__input-address"
+              value={ endereco }
+              onChange={ ({ target }) => setEndereco(target.value) }
+            />
+            <input
+              type="text"
+              name="address-number"
+              className="address-number"
+              id="address-number"
+              placeholder="Nº 00"
+              data-testid="customer_checkout__input-address-number"
+              value={ numEndereco }
+              onChange={ ({ target }) => setNumEndereco(target.value) }
+            />
+          </div>
         </label>
         <button
           type="button"

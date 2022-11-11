@@ -60,7 +60,6 @@ export const Form = styled.form`
   }
 
   svg {
-    color: red;
     cursor: pointer;
     height: 25px;
     margin-left: 210px;

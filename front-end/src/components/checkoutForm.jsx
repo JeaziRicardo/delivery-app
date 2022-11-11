@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { getTotalCart, removeCartItem } from '../helpers/cart.helper';
 import DeliveryContext from '../context/DeliveryContext';
-import SaleForm from './saleForm';
 import { ContainerForm } from '../style/checkoutProducts';
 
 export default function CheckoutForm() {
@@ -60,8 +59,6 @@ export default function CheckoutForm() {
       >
         {`Total: ${getTotalCart(cartListItens).toFixed(2).replace('.', ',')}`}
       </span>
-      <h2>Detalhes e Endereço para Entrega</h2>
-      <SaleForm />
     </ContainerForm>
   );
 }

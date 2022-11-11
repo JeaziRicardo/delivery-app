@@ -2,16 +2,22 @@ import styled from 'styled-components';
 
 export const ContainerCheckout = styled.div`
   height: 100vh;
+
+  hr {
+    border: none;
+    height: 0.5px;
+    background-color: var(--borda2);
+  }
 `;
 
 export const ContainerForm = styled.div`
-  /* align-items: center; */
-  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin-left: 10px;
+
+
   table {
-    /* border: 1px solid black; */
     margin-bottom: 10px;
     width: 90vw;
     img {
