@@ -29,12 +29,9 @@ export const CardOrderItem = styled.div`
   p[value~='Pendente'] {
     color: var(--destaque)
   }
-  /* hr {
-    border: none;
-    height: 0.3px;
-    width: 100%;
-    background-color: var(--borda);
-  } */
+  .price {
+    font-weight: 500;
+  }
 `;
 
 export const bola = styled.h1`
