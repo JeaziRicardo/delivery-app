@@ -27,6 +27,7 @@ export default function CardOrder({ orderId, status, date, total, delivery }) {
         <p>Fornececido por IDelivery</p>
         <p
           data-testid={ `${role}_orders__element-delivery-status-${orderId}` }
+          value={ status }
         >
           {`${status} >`}
         </p>
@@ -45,7 +46,6 @@ export default function CardOrder({ orderId, status, date, total, delivery }) {
           {delivery}
         </p>
       )}
-      <hr />
     </CardOrderItem>
   );
 }

@@ -21,17 +21,20 @@ export const DetailsList = styled.div`
 export const CardOrderItem = styled.div`
 
   margin: 15px 0;
+  border-bottom: 1px solid var(--borda);
   .middle-info {
     display: flex;
-    border: 1px solid red;
     justify-content: space-between
   }
-  hr {
+  p[value~='Pendente'] {
+    color: var(--destaque)
+  }
+  /* hr {
     border: none;
     height: 0.3px;
     width: 100%;
     background-color: var(--borda);
-  }
+  } */
 `;
 
 export const bola = styled.h1`
