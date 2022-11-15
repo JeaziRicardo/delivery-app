@@ -8,6 +8,10 @@ export const ContainerForm = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+
+  figure img {
+    width: 350px;
+  }
 `;
 
 export const Form = styled.form`
@@ -46,6 +50,7 @@ export const Form = styled.form`
     box-shadow: 0px 0.8px 2px var(--sombra);
     border: none;
     border-radius: 4px;
+    margin-top: 15px;
     :hover:enabled {
       background-color: white;
       color: var(--destaque);
@@ -62,8 +67,8 @@ export const Form = styled.form`
   svg {
     cursor: pointer;
     height: 25px;
-    margin-left: 210px;
-    margin-top: 25px;
+    margin-left: 225px;
+    margin-top: 35px;
     position: fixed;
     width: 50px;
     z-index: 2;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loginValidation } from '../helpers/validation.helper';
-
+import logo from '../images/logo-bia-final.png';
 import { postRegister } from '../helpers/api';
 import { setItem } from '../helpers/localStorage.helper';
 import { ContainerForm, Form } from '../style/Form';
@@ -25,6 +25,9 @@ export default function RegisterForm() {
 
   return (
     <ContainerForm>
+      <figure>
+        <img src={ logo } alt="logo bia" />
+      </figure>
       <h1>Cadastro</h1>
       <Form>
         <label htmlFor="nome">
